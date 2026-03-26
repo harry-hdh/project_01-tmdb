@@ -43,7 +43,7 @@ rm tmdb-movies-clean1.csv tmdb-movies-clean3.csv tmdb-movies-clean2.csv;
 awk -F','  'BEGIN {OFS=","} { if ($14 >= 7.5)  print }' tmdb-movies-clean-final.csv > tmdb-movies-filter-by-vote_avg.csv;
 
 # 3.Highest and lowest revenue movies
-{ tail -n +2 tmdb-movies-clean-final.csv | sort -t "," -k4,4r | awk -F',' 'NR==1 {print "Movie has highest revenue: ", $5," - ",$4} END{print "Movie has lowest revenue: ", $5," - ",$4}'; printf '%.s─' $(seq 1 $(tput cols)); } > cau_3.txt
+{ tail -n +2 tmdb-movies-clean-final.csv | sort -t "," -k4,4rn | awk -F',' 'NR==1 {print "Movie has highest revenue: ", $5," - ",$4} END{print "Movie has lowest revenue: ", $5," - ",$4}'; printf '%.s─' $(seq 1 $(tput cols)); } > cau_3.txt
 
 # 4. Total revenue
 { awk -F',' '{sum+=$4} END {print "Total revenue: ", sprintf("%.0f",sum)}' tmdb-movies-clean-final.csv; printf '%.s─' $(seq 1 $(tput cols)); } > cau_4.txt
@@ -51,7 +51,7 @@ awk -F','  'BEGIN {OFS=","} { if ($14 >= 7.5)  print }' tmdb-movies-clean-final.
 # 5. Top 10 movies with highest revenue
 { 
 echo "Top 10 movies with highest revenue:"; 
-tail -n +2 tmdb-movies-clean-final.csv | sort -t "," -k4,4r | awk -F',' '{print $5," - ",$4} NR==10{exit}'; 
+tail -n +2 tmdb-movies-clean-final.csv | sort -t "," -k4,4rn | awk -F',' '{print $5," - ",$4} NR==10{exit}'; 
 printf '%.s─' $(seq 1 $(tput cols));
 } > cau_5.txt
 
